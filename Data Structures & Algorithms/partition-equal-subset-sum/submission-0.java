@@ -1,0 +1,17 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int n=nums.length;
+        int sum=0;
+        for(int i=0;i<n;i++)sum+=nums[i];
+        if(sum%2!=0)return false;
+        int required = sum/2;
+        boolean[] dp = new boolean[required+1];
+        dp[0]=true;
+        for(int num:nums){
+            for(int j=required;j>=num;j--){
+                dp[j]=dp[j]||dp[j-num];
+            }
+        }
+        return dp[required];
+    }
+}
